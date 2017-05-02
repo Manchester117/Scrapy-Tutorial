@@ -19,7 +19,7 @@ class JobboleSpider(scrapy.Spider):
         for post_url in post_urls:
             image_url = post_url.css("img::attr('src')").extract_first("")
             post_url = post_url.css("::attr(href)").extract_first("")
-            # 使用yield将回调方法教给scrapy调用.并且获取URL后,回调文章的具体抓取方法.
+            # 使用yield将回调方法交给scrapy调用.并且获取URL后,回调文章的具体抓取方法.
             # urllib中的parse.urljoin()方法可以自动匹配URL.
             yield Request(url=parse.urljoin(response.url, post_url), meta={"front_image_url": image_url}, callback=self.parse_detail)
 
